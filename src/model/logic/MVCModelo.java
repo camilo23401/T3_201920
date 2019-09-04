@@ -1,5 +1,6 @@
 package model.logic;
 
+import model.data_structures.ListaEncadenada;
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 
@@ -12,6 +13,7 @@ public class MVCModelo {
 	 * Atributos del modelo del mundo
 	 */
 	private IArregloDinamico datos;
+	private ListaEncadenada<UBERTrip> datosTaller;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
@@ -19,6 +21,8 @@ public class MVCModelo {
 	public MVCModelo()
 	{
 		datos = new ArregloDinamico(7);
+		datosTaller = new ListaEncadenada<UBERTrip>();
+		
 	}
 	
 	/**
