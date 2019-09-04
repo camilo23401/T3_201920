@@ -1,4 +1,6 @@
-package view;
+package model.logic;
+
+
 
 public class UBERTrip {
 

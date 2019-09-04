@@ -86,8 +86,24 @@ public class Controller {
 					view.printModelo(modelo);
 					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;	
+				
+				case 6:
+					try
+					{
+						String [] arregloRespuestas = modelo.cargarDatos();
+						for(int i=0;i<arregloRespuestas.length;i++)
+						{
+							System.out.println("-------------------------------------------------------------");
+							System.out.println(arregloRespuestas[i]);
+							System.out.println("-------------------------------------------------------------");	
+						}	
+					}
+					catch(Exception e)
+					{
+						System.out.println("Se presentó un error leyendo el archivo");
+					}
 					
-				case 6: 
+				case 7: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

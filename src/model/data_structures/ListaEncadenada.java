@@ -1,4 +1,6 @@
-package data_structures;
+package model.data_structures;
+
+
 
 public class ListaEncadenada<E> implements IListaEncadenada<E> {
 
@@ -115,6 +117,9 @@ public class ListaEncadenada<E> implements IListaEncadenada<E> {
 	{
 		return primerNodo.darSiguiente();
 	}
-
+	public NodoListaEncadenada<E> darUltimoAgregado()
+	{
+		return ultimoAgregado;
+	}
 
 }
