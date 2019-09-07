@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import com.opencsv.CSVReader;
 
-
+import model.data_structures.*;
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 import model.data_structures.ListaEncadenada;
@@ -80,6 +80,13 @@ public class MVCModelo {
 	{
 		return datos.eliminar(dato);
 	}
+	
+	
+	public ListaEncadenada<UBERTrip> consultarPorHora(ListaEncadenada<UBERTrip> inicial){
+		ListaEncadenada<UBERTrip>nueva=new ListaEncadenada<UBERTrip>();
+		NodoListaEncadenada<UBERTrip>actual=inicial.darNodoActual();
+		
+	}
 	public String[] cargarDatos() throws IOException
 	{
 		String[] respuesta = new String[3];
@@ -106,7 +113,7 @@ public class MVCModelo {
 		}
 		String totalViajes = "El número total de viajes fue de: " + contador;
 		String infoPrimero = "Primer viaje \n Zona origen: " + primerViaje.darSourceid() + "\n Zona destino: " + primerViaje.darDstid() + "\n Hora: " + primerViaje.darHora() + "\n Tiempo promedio: " + primerViaje.darTiempoPromedio();
-		String infoUltimo = "Ultimo viaje \n Zona origen: " + datosTaller.darUltimoAgregado().darSourceid() + "\n Zona destino: " + datosTaller.darUltimoAgregado().darDstid() + "\n Hora: " + datosTaller.darUltimoAgregado().darHora() + "\n Tiempo promedio: " + datosTaller.darUltimoAgregado().darTiempoPromedio();
+		String infoUltimo = "Ultimo viaje \n Zona origen: " + datosTaller.darUltimoAgregado().darElemento().darSourceid() + "\n Zona destino: " + datosTaller.darUltimoAgregado().darElemento().darDstid() + "\n Hora: " + datosTaller.darUltimoAgregado().darHora() + "\n Tiempo promedio: " + datosTaller.darUltimoAgregado().darTiempoPromedio();
 		
 		respuesta[0] = totalViajes;
 		respuesta[1] = infoPrimero;
