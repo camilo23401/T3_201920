@@ -8,10 +8,6 @@ import java.io.IOException;
 import com.opencsv.CSVReader;
 
 import model.data_structures.*;
-import model.data_structures.ArregloDinamico;
-import model.data_structures.IArregloDinamico;
-import model.data_structures.ListaEncadenada;
-
 /**
  * Definicion del modelo del mundo
  *
@@ -85,10 +81,13 @@ public class MVCModelo {
 	public ListaEncadenada<UBERTrip> consultarPorHora(ListaEncadenada<UBERTrip> inicial){
 		ListaEncadenada<UBERTrip>nueva=new ListaEncadenada<UBERTrip>();
 		NodoListaEncadenada<UBERTrip>actual=inicial.darNodoActual();
+		return null;
 		
 	}
 	public String[] cargarDatos() throws IOException
 	{
+		UBERTrip primerViaje = null;
+		UBERTrip viaje = null;
 		String[] respuesta = new String[3];
 		int contador = 0;
 		String rutaSemanal = "data/bogota-cadastral-2018-2-All-HourlyAggregate.csv";
@@ -100,12 +99,12 @@ public class MVCModelo {
 			{
 				if(contador == 1)
 				{
-					UBERTrip primerViaje = null;
+					primerViaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Short.parseShort(siguiente[2]), Double.parseDouble(siguiente[3]), Short.parseShort("-1"), Short.parseShort("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
 					datosTaller.agregarElemento(primerViaje);
 				}
 				else
 				{
-					UBERTrip viaje = null;
+					viaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Short.parseShort(siguiente[2]), Double.parseDouble(siguiente[3]), Short.parseShort("-1"), Short.parseShort("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));;
 					datosTaller.agregarElemento(viaje);
 				}
 			}
@@ -113,12 +112,28 @@ public class MVCModelo {
 		}
 		String totalViajes = "El número total de viajes fue de: " + contador;
 		String infoPrimero = "Primer viaje \n Zona origen: " + primerViaje.darSourceid() + "\n Zona destino: " + primerViaje.darDstid() + "\n Hora: " + primerViaje.darHora() + "\n Tiempo promedio: " + primerViaje.darTiempoPromedio();
-		String infoUltimo = "Ultimo viaje \n Zona origen: " + datosTaller.darUltimoAgregado().darElemento().darSourceid() + "\n Zona destino: " + datosTaller.darUltimoAgregado().darElemento().darDstid() + "\n Hora: " + datosTaller.darUltimoAgregado().darHora() + "\n Tiempo promedio: " + datosTaller.darUltimoAgregado().darTiempoPromedio();
+		String infoUltimo = "Ultimo viaje \n Zona origen: " + datosTaller.darUltimoAgregado().darElemento().darSourceid() + "\n Zona destino: " + datosTaller.darUltimoAgregado().darElemento().darDstid() + "\n Hora: " + datosTaller.darUltimoAgregado().darElemento().darHora() + "\n Tiempo promedio: " + datosTaller.darUltimoAgregado().darElemento().darTiempoPromedio();
 		
 		respuesta[0] = totalViajes;
 		respuesta[1] = infoPrimero;
 		respuesta[2] = infoUltimo;
 		return respuesta;
+	}
+	public ListaEncadenada<UBERTrip> consultarViajesHora(String pHora)
+	{
+		int hora = Integer.parseInt(pHora);
+		ListaEncadenada<UBERTrip> rta = new ListaEncadenada<UBERTrip>();
+		NodoListaEncadenada<UBERTrip> actual = datosTaller.darNodoActual();
+		while(actual!=null)
+		{
+			UBERTrip viajeUber = actual.darElemento();
+			if(hora == viajeUber.darHora())
+			{
+				rta.agregarElemento(viajeUber);
+			}
+			actual = actual.darSiguiente();
+		}
+		return rta;
 	}
 
 

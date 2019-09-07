@@ -1,4 +1,4 @@
-package data_structures;
+package model.data_structures;
 
 public interface IListaEncadenada <E>{
 	/**

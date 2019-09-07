@@ -20,7 +20,8 @@ public class MVCView
 			System.out.println("4. Eliminar String");
 			System.out.println("5. Imprimir el Arreglo");
 			System.out.println("6. Cargar los datos");
-			System.out.println("7. Exit");
+			System.out.println("7. Consultar los viajes de una hora dada");
+			System.out.println("8. Exit");
 			System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
 		}
 

@@ -2,7 +2,9 @@ package controller;
 
 import java.util.Scanner;
 
+import model.data_structures.ListaEncadenada;
 import model.logic.MVCModelo;
+import model.logic.UBERTrip;
 import view.MVCView;
 
 public class Controller {
@@ -102,8 +104,18 @@ public class Controller {
 					{
 						System.out.println("Se presentó un error leyendo el archivo");
 					}
+					break;
 					
-				case 7: 
+				case 7:
+					System.out.println("Digite la hora de los viajes a buscar");
+					dato = lector.next();
+					System.out.println("-------------------------------------------------------------");
+					ListaEncadenada<UBERTrip> rta = modelo.consultarViajesHora(dato);
+					System.out.println(rta.darTamano());
+					System.out.println("-------------------------------------------------------------");
+					break;
+					
+				case 8: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;
