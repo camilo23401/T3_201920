@@ -31,6 +31,7 @@ public class Controller {
 		boolean fin = false;
 		String dato = "";
 		String respuesta = "";
+		String mesDigitado = "";
 
 		while( !fin ){
 			view.printMenu();
@@ -108,14 +109,31 @@ public class Controller {
 					
 				case 7:
 					System.out.println("Digite la hora de los viajes a buscar");
-					dato = lector.next();
+					mesDigitado = lector.next();
 					System.out.println("-------------------------------------------------------------");
-					ListaEncadenada<UBERTrip> rta = modelo.consultarViajesHora(dato);
+					ListaEncadenada<UBERTrip> rta = modelo.consultarViajesHora(mesDigitado);
 					System.out.println(rta.darTamano());
 					System.out.println("-------------------------------------------------------------");
 					break;
+				
+				case 8:
 					
-				case 8: 
+					break;
+					
+				case 9:
+					System.out.println("Se ordenaran los datos del mes ingresado en el número 7 con el algoritmo de merge sort");
+					ListaEncadenada<UBERTrip> viajesHora = modelo.consultarViajesHora(mesDigitado);
+					modelo.ordenarViajesMergeSort(viajesHora.darNodoActual());
+					System.out.println("Se ordenaron los datos");
+					break;
+					
+				case 10:
+					break;
+					
+				case 11:
+					break;
+					
+				case 12: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

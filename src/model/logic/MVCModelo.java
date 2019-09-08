@@ -135,6 +135,80 @@ public class MVCModelo {
 		}
 		return rta;
 	}
+	public void ordenarViajesShellSort(ListaEncadenada<UBERTrip> pListaPorOrdenar)
+	{
+		
+	}
+	public NodoListaEncadenada<UBERTrip> ordenarViajesMergeSort(NodoListaEncadenada<UBERTrip> pNodo)
+	{
+		if(pNodo==null||pNodo.darSiguiente()==null)
+		{
+			return pNodo;
+		}
+		else
+		{
+			NodoListaEncadenada<UBERTrip> mitad = sacarMitad(pNodo);
+			NodoListaEncadenada<UBERTrip> mitadMasUno = mitad.darSiguiente();
+			
+			mitad.cambiarSiguiente(null);
+			
+			NodoListaEncadenada<UBERTrip> ladoIzquierdo = ordenarViajesMergeSort(pNodo);
+			NodoListaEncadenada<UBERTrip> ladoDerecho = ordenarViajesMergeSort(mitadMasUno);
+			
+			NodoListaEncadenada<UBERTrip> listaOrdenada = organizarDatos(ladoIzquierdo, ladoDerecho);
+			return listaOrdenada;
+		}
+	}
+	
+	public NodoListaEncadenada<UBERTrip> sacarMitad(NodoListaEncadenada<UBERTrip> pNodo)
+	{
+		if (pNodo == null)
+		{
+			return pNodo;
+		}
+		else
+		{
+			NodoListaEncadenada<UBERTrip> adelante = pNodo.darSiguiente();
+			NodoListaEncadenada<UBERTrip> detras = pNodo;
+			while(adelante!=null)
+			{
+				adelante = adelante.darSiguiente();
+				if(adelante!=null)
+				{
+					detras = detras.darSiguiente();
+					adelante = adelante.darSiguiente();
+				}
+			}
+			return detras;
+		}
+	}
+	public NodoListaEncadenada<UBERTrip> organizarDatos(NodoListaEncadenada<UBERTrip> x, NodoListaEncadenada<UBERTrip> y)
+	{
+		NodoListaEncadenada<UBERTrip> rta = null;
+		if(x==null)
+		{
+			return y;
+		}
+		else if(y==null)
+		{
+			return x;
+		}
+		System.out.println(x);
+		System.out.println(y);
+		if(x.darElemento().compareTo(y.darElemento())==-1 || x.darElemento().compareTo(y.darElemento())==0)
+		{
+			rta = x;
+			NodoListaEncadenada<UBERTrip> nuevoSiguienteRecursion = organizarDatos(x.darSiguiente(), y);
+			rta.cambiarSiguiente(nuevoSiguienteRecursion);
+		}
+		else
+		{
+			rta = y;
+			NodoListaEncadenada<UBERTrip> nuevoSiguienteRecursion = organizarDatos(x, y.darSiguiente());
+			rta.cambiarSiguiente(nuevoSiguienteRecursion);
+		}
+		return rta;
+	}
 
 
 }
