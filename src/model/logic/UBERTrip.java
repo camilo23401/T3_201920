@@ -5,16 +5,16 @@ package model.logic;
 public class UBERTrip implements Comparable<UBERTrip>{
 	private int sourceid;
 	private int dstid;
-	private short mes;
-	private short dia;
-	private short hora;
+	private int mes;
+	private int dia;
+	private int hora;
 	private double tiempoPromedio;
 	private double desviacionEstandarTiempo;
 	private double tiempoPromedioGeometrico;
 	private double desviacionEstandarTiempoGeometrico;
 
 
-	public UBERTrip(int pSourceid, int pDstid, short pHora, double pTiempoPromedio, short pMes, short pDia, double pDesviacionEstandarTiempo, double pTiempoPromedioGeometrico, double pDesviacionEstandarTiempoGeometrico)
+	public UBERTrip(int pSourceid, int pDstid, int pHora, double pTiempoPromedio, int pMes, int pDia, double pDesviacionEstandarTiempo, double pTiempoPromedioGeometrico, double pDesviacionEstandarTiempoGeometrico)
 	{
 		sourceid = pSourceid;
 		dstid = pDstid;
@@ -26,6 +26,18 @@ public class UBERTrip implements Comparable<UBERTrip>{
 		tiempoPromedioGeometrico = pTiempoPromedioGeometrico;
 		desviacionEstandarTiempoGeometrico = pDesviacionEstandarTiempoGeometrico;
 	}
+	public void cambiarInfo(UBERTrip nuevo)
+	{
+		sourceid = nuevo.darSourceid();
+		dstid = nuevo.darDstid();
+		mes = nuevo.darMes();
+		dia = nuevo.darDia();
+		hora = nuevo.darHora();
+		tiempoPromedio = nuevo.darTiempoPromedio();
+		desviacionEstandarTiempo = nuevo.darDesviacionEstandarTiempo();
+		tiempoPromedioGeometrico = nuevo.darTiempoPromedioGeometrico();
+		desviacionEstandarTiempoGeometrico = nuevo.darDesviacionEstandarTiempoGeometrico();
+	}
 	public int darSourceid()
 	{
 		return sourceid;
@@ -34,15 +46,15 @@ public class UBERTrip implements Comparable<UBERTrip>{
 	{
 		return dstid;
 	}
-	public short darMes()
+	public int darMes()
 	{
 		return mes;	
 	}
-	public short darDia()
+	public int darDia()
 	{
 		return dia;
 	}
-	public short darHora()
+	public int darHora()
 	{
 		return hora;
 	}

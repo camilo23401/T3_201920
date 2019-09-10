@@ -10,12 +10,22 @@ public class ListaEncadenada<E> implements IListaEncadenada<E> {
 
 	private int tamanio;
 
+	public ListaEncadenada(NodoListaEncadenada<E>primero) {
+		primerNodo=primero;
+		tamanio=1;
+	}
 	public ListaEncadenada() {
 		primerNodo=null;
 		tamanio=0;
 	}
 	public int darTamano() {
-		return tamanio;
+		int count = 0;
+		NodoListaEncadenada<E> h = this.darNodoActual();
+		while (h != null) {
+			count++;
+			h = h.darSiguiente();
+		}
+		return count;
 	}
 
 	@Override
@@ -108,6 +118,31 @@ public class ListaEncadenada<E> implements IListaEncadenada<E> {
 		}
 
 
+	}
+	public E set(int index, E element) throws IndexOutOfBoundsException 
+	{
+		NodoListaEncadenada<E>actual=primerNodo;
+		if(index < 0 || index >= tamanio)
+		{
+			throw new IndexOutOfBoundsException("Se está pidiendo el indice: " + index + " y el tamaño de la lista es de " + tamanio);
+		}
+		if(tamanio==0){
+			throw new IndexOutOfBoundsException();
+		}
+		if(index==0){
+			primerNodo.cambiarElemento(element);
+		}
+
+		else{
+
+			int posicion=0;
+			while(actual!=null&&actual.darSiguiente()!=null&&posicion<index){
+				actual=actual.darSiguiente();
+				posicion++;
+			}
+			actual.cambiarElemento(element);
+		}
+		return actual.darElemento();
 	}
 	public NodoListaEncadenada<E> darNodoActual()
 	{

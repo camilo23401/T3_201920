@@ -38,59 +38,9 @@ public class Controller {
 
 			int option = lector.nextInt();
 			switch(option){
-				case 1:
-					System.out.println("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				    int capacidad = lector.nextInt();
-				    modelo = new MVCModelo(capacidad); 
-					System.out.println("Arreglo Dinamico creado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 2:
-					System.out.println("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.next();
-					modelo.agregar(dato);
-					System.out.println("Dato agregado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 3:
-					System.out.println("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.next();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato encontrado: "+ respuesta);
-					}
-					else
-					{
-						System.out.println("Dato NO encontrado");
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 4:
-					System.out.println("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						System.out.println("Dato NO eliminado");							
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 5: 
-					System.out.println("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
 				
-				case 6:
+				
+				case 1:
 					try
 					{
 						String [] arregloRespuestas = modelo.cargarDatos();
@@ -107,24 +57,20 @@ public class Controller {
 					}
 					break;
 					
-				case 7:
+				case 2:
 					System.out.println("Digite la hora de los viajes a buscar");
 					mesDigitado = lector.next();
 					System.out.println("-------------------------------------------------------------");
 					ListaEncadenada<UBERTrip> rta = modelo.consultarViajesHora(mesDigitado);
-					System.out.println(rta.darTamano());
+					System.out.println("El total de viajes a esa hora fueron: "+rta.darTamano());
 					System.out.println("-------------------------------------------------------------");
 					break;
-				
-				case 8:
 					
-					break;
-					
-				case 9:
-					System.out.println("Se ordenaran los datos del mes ingresado en el número 7 con el algoritmo de merge sort");
+				case 3:
 					ListaEncadenada<UBERTrip> viajesHora = modelo.consultarViajesHora(mesDigitado);
-					modelo.ordenarViajesMergeSort(viajesHora.darNodoActual());
-					System.out.println("Se ordenaron los datos");
+					modelo.ShellSort(viajesHora);
+					System.out.println("Se ordenaran los viajes de la hora ingresada en el número 2 con el algoritmo de shell sort");
+					System.out.println(viajesHora.darTamano());
 					break;
 					
 				case 10:
@@ -133,7 +79,7 @@ public class Controller {
 				case 11:
 					break;
 					
-				case 12: 
+				case 7: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

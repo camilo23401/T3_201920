@@ -19,7 +19,7 @@ public class MVCModelo {
 	private IArregloDinamico datos;
 	private ListaEncadenada<UBERTrip> datosTaller;
 	private CSVReader lector;
-	
+
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
@@ -27,9 +27,9 @@ public class MVCModelo {
 	{
 		datos = new ArregloDinamico(7);
 		datosTaller = new ListaEncadenada<UBERTrip>();
-		
+
 	}
-	
+
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
 	 * @param tamano
@@ -38,7 +38,7 @@ public class MVCModelo {
 	{
 		datos = new ArregloDinamico(capacidad);
 	}
-	
+
 	/**
 	 * Servicio de consulta de numero de elementos presentes en el modelo 
 	 * @return numero de elementos presentes en el modelo
@@ -56,7 +56,7 @@ public class MVCModelo {
 	{	
 		datos.agregar(dato);
 	}
-	
+
 	/**
 	 * Requerimiento buscar dato
 	 * @param dato Dato a buscar
@@ -66,7 +66,7 @@ public class MVCModelo {
 	{
 		return datos.buscar(dato);
 	}
-	
+
 	/**
 	 * Requerimiento eliminar dato
 	 * @param dato Dato a eliminar
@@ -76,13 +76,13 @@ public class MVCModelo {
 	{
 		return datos.eliminar(dato);
 	}
-	
-	
+
+
 	public ListaEncadenada<UBERTrip> consultarPorHora(ListaEncadenada<UBERTrip> inicial){
 		ListaEncadenada<UBERTrip>nueva=new ListaEncadenada<UBERTrip>();
 		NodoListaEncadenada<UBERTrip>actual=inicial.darNodoActual();
 		return null;
-		
+
 	}
 	public String[] cargarDatos() throws IOException
 	{
@@ -99,12 +99,12 @@ public class MVCModelo {
 			{
 				if(contador == 1)
 				{
-					primerViaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Short.parseShort(siguiente[2]), Double.parseDouble(siguiente[3]), Short.parseShort("-1"), Short.parseShort("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
+					primerViaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Integer.parseInt(siguiente[2]), Double.parseDouble(siguiente[3]), Integer.parseInt("-1"), Integer.parseInt("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
 					datosTaller.agregarElemento(primerViaje);
 				}
 				else
 				{
-					viaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Short.parseShort(siguiente[2]), Double.parseDouble(siguiente[3]), Short.parseShort("-1"), Short.parseShort("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));;
+					viaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Integer.parseInt(siguiente[2]), Double.parseDouble(siguiente[3]), Integer.parseInt("-1"), Integer.parseInt("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));;
 					datosTaller.agregarElemento(viaje);
 				}
 			}
@@ -113,7 +113,7 @@ public class MVCModelo {
 		String totalViajes = "El número total de viajes fue de: " + contador;
 		String infoPrimero = "Primer viaje \n Zona origen: " + primerViaje.darSourceid() + "\n Zona destino: " + primerViaje.darDstid() + "\n Hora: " + primerViaje.darHora() + "\n Tiempo promedio: " + primerViaje.darTiempoPromedio();
 		String infoUltimo = "Ultimo viaje \n Zona origen: " + datosTaller.darUltimoAgregado().darElemento().darSourceid() + "\n Zona destino: " + datosTaller.darUltimoAgregado().darElemento().darDstid() + "\n Hora: " + datosTaller.darUltimoAgregado().darElemento().darHora() + "\n Tiempo promedio: " + datosTaller.darUltimoAgregado().darElemento().darTiempoPromedio();
-		
+
 		respuesta[0] = totalViajes;
 		respuesta[1] = infoPrimero;
 		respuesta[2] = infoUltimo;
@@ -135,80 +135,69 @@ public class MVCModelo {
 		}
 		return rta;
 	}
-	public void ordenarViajesShellSort(ListaEncadenada<UBERTrip> pListaPorOrdenar)
-	{
-		
+	public void ShellSort(ListaEncadenada<UBERTrip>lista) {
+	    int n = lista.darTamano();
+	    for (int gap = n / 2; gap > 0; gap /= 2) {
+	        for (int i = gap; i < n; i++) {
+	            UBERTrip key = lista.darElemento(i);
+	            int j = i;
+	            while (j >= gap && lista.darElemento(j-gap).compareTo(key)>0) {
+	            	lista.set(j, lista.darElemento(j-gap));
+	                j -= gap;
+	            }
+	            
+	            lista.set(j, key);
+	            	
+	        }
+	    }
 	}
-	public NodoListaEncadenada<UBERTrip> ordenarViajesMergeSort(NodoListaEncadenada<UBERTrip> pNodo)
-	{
-		if(pNodo==null||pNodo.darSiguiente()==null)
-		{
-			return pNodo;
-		}
-		else
-		{
-			NodoListaEncadenada<UBERTrip> mitad = sacarMitad(pNodo);
-			NodoListaEncadenada<UBERTrip> mitadMasUno = mitad.darSiguiente();
-			
-			mitad.cambiarSiguiente(null);
-			
-			NodoListaEncadenada<UBERTrip> ladoIzquierdo = ordenarViajesMergeSort(pNodo);
-			NodoListaEncadenada<UBERTrip> ladoDerecho = ordenarViajesMergeSort(mitadMasUno);
-			
-			NodoListaEncadenada<UBERTrip> listaOrdenada = organizarDatos(ladoIzquierdo, ladoDerecho);
-			return listaOrdenada;
-		}
+	public void swap(int i, int j) {
+
 	}
-	
-	public NodoListaEncadenada<UBERTrip> sacarMitad(NodoListaEncadenada<UBERTrip> pNodo)
-	{
-		if (pNodo == null)
-		{
-			return pNodo;
+	public NodoListaEncadenada<UBERTrip>mergeSort(NodoListaEncadenada<UBERTrip> a) {
+		NodoListaEncadenada<UBERTrip> cabezaVieja = a;
+		int mid = this.darTamanio(a) / 2;
+		if (a.darSiguiente()== null)
+			return a;
+
+		while (mid - 1 > 0) {
+			cabezaVieja = cabezaVieja.darSiguiente();
+			mid--;
 		}
-		else
-		{
-			NodoListaEncadenada<UBERTrip> adelante = pNodo.darSiguiente();
-			NodoListaEncadenada<UBERTrip> detras = pNodo;
-			while(adelante!=null)
-			{
-				adelante = adelante.darSiguiente();
-				if(adelante!=null)
-				{
-					detras = detras.darSiguiente();
-					adelante = adelante.darSiguiente();
-				}
-			}
-			return detras;
-		}
+		NodoListaEncadenada<UBERTrip> nuevaCabeza = cabezaVieja.darSiguiente();
+		cabezaVieja.cambiarSiguiente(null); 
+		cabezaVieja = a;
+		NodoListaEncadenada<UBERTrip> t1 = mergeSort(nuevaCabeza);
+		NodoListaEncadenada<UBERTrip> t2 = mergeSort(cabezaVieja);
+		return MergeList(t1, t2); 
 	}
-	public NodoListaEncadenada<UBERTrip> organizarDatos(NodoListaEncadenada<UBERTrip> x, NodoListaEncadenada<UBERTrip> y)
-	{
-		NodoListaEncadenada<UBERTrip> rta = null;
-		if(x==null)
-		{
-			return y;
+
+	public NodoListaEncadenada<UBERTrip> MergeList(NodoListaEncadenada<UBERTrip> a, NodoListaEncadenada<UBERTrip> b) {
+		NodoListaEncadenada<UBERTrip> result = null;
+		if (a == null)
+			return b;
+		if (b == null)
+			return a;
+		if (a.darElemento().compareTo(b.darElemento())>0) {
+			result = b;
+			result.cambiarSiguiente( MergeList(a, b.darSiguiente()));
+		} else {
+			result = a;
+			result.cambiarSiguiente(MergeList(a.darSiguiente(), b));
 		}
-		else if(y==null)
-		{
-			return x;
-		}
-		System.out.println(x);
-		System.out.println(y);
-		if(x.darElemento().compareTo(y.darElemento())==-1 || x.darElemento().compareTo(y.darElemento())==0)
-		{
-			rta = x;
-			NodoListaEncadenada<UBERTrip> nuevoSiguienteRecursion = organizarDatos(x.darSiguiente(), y);
-			rta.cambiarSiguiente(nuevoSiguienteRecursion);
-		}
-		else
-		{
-			rta = y;
-			NodoListaEncadenada<UBERTrip> nuevoSiguienteRecursion = organizarDatos(x, y.darSiguiente());
-			rta.cambiarSiguiente(nuevoSiguienteRecursion);
-		}
-		return rta;
+		return result;
 	}
+	public int darTamanio(NodoListaEncadenada<UBERTrip> a) {
+		int count = 0;
+		NodoListaEncadenada<UBERTrip> h = a;
+		while (h != null) {
+			count++;
+			h = h.darSiguiente();
+		}
+		return count;
+	}
+
+
 
 
 }
