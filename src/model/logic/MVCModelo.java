@@ -19,6 +19,7 @@ public class MVCModelo {
 	private IArregloDinamico datos;
 	private ListaEncadenada<UBERTrip> datosTaller;
 	private CSVReader lector;
+	private ArregloDinamico datosTallerDinamico;
 
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
@@ -27,6 +28,7 @@ public class MVCModelo {
 	{
 		datos = new ArregloDinamico(7);
 		datosTaller = new ListaEncadenada<UBERTrip>();
+		datosTallerDinamico=new ArregloDinamico(14000000);
 
 	}
 
@@ -52,30 +54,9 @@ public class MVCModelo {
 	 * Requerimiento de agregar dato
 	 * @param dato
 	 */
-	public void agregar(String dato)
-	{	
-		datos.agregar(dato);
-	}
 
-	/**
-	 * Requerimiento buscar dato
-	 * @param dato Dato a buscar
-	 * @return dato encontrado
-	 */
-	public String buscar(String dato)
-	{
-		return datos.buscar(dato);
-	}
 
-	/**
-	 * Requerimiento eliminar dato
-	 * @param dato Dato a eliminar
-	 * @return dato eliminado
-	 */
-	public String eliminar(String dato)
-	{
-		return datos.eliminar(dato);
-	}
+
 
 
 	public ListaEncadenada<UBERTrip> consultarPorHora(ListaEncadenada<UBERTrip> inicial){
@@ -101,11 +82,13 @@ public class MVCModelo {
 				{
 					primerViaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Integer.parseInt(siguiente[2]), Double.parseDouble(siguiente[3]), Integer.parseInt("-1"), Integer.parseInt("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
 					datosTaller.agregarElemento(primerViaje);
+					datosTallerDinamico.agregar(primerViaje);
 				}
 				else
 				{
 					viaje = new UBERTrip(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Integer.parseInt(siguiente[2]), Double.parseDouble(siguiente[3]), Integer.parseInt("-1"), Integer.parseInt("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));;
 					datosTaller.agregarElemento(viaje);
+					datosTallerDinamico.agregar(viaje);
 				}
 			}
 			contador++;
@@ -135,24 +118,34 @@ public class MVCModelo {
 		}
 		return rta;
 	}
-	public void ShellSort(ListaEncadenada<UBERTrip>lista) {
-	    int n = lista.darTamano();
-	    for (int gap = n / 2; gap > 0; gap /= 2) {
-	        for (int i = gap; i < n; i++) {
-	            UBERTrip key = lista.darElemento(i);
-	            int j = i;
-	            while (j >= gap && lista.darElemento(j-gap).compareTo(key)>0) {
-	            	lista.set(j, lista.darElemento(j-gap));
-	                j -= gap;
-	            }
-	            
-	            lista.set(j, key);
-	            	
-	        }
-	    }
+	public ArregloDinamico consultarViajesHoraDinamico(String pHora)
+	{
+		int hora = Integer.parseInt(pHora);
+		ArregloDinamico rta = new ArregloDinamico(1000000);
+		for (int i = 0; i < datosTallerDinamico.darTamano(); i++) {
+			UBERTrip actual=datosTallerDinamico.darElemento(i);
+			if(actual.darHora()==hora) {
+				rta.agregar(actual);
+			}
+		}
+		return rta;	
 	}
-	public void swap(int i, int j) {
 
+	public void ShellSort(ListaEncadenada<UBERTrip>lista) {
+		int n = lista.darTamano();
+		for (int gap = n / 2; gap > 0; gap /= 2) {
+			for (int i = gap; i < n; i++) {
+				UBERTrip key = lista.darElemento(i);
+				int j = i;
+				while (j >= gap && lista.darElemento(j-gap).compareTo(key)>0) {
+					lista.set(j, lista.darElemento(j-gap));
+					j -= gap;
+				}
+
+				lista.set(j, key);
+
+			}
+		}
 	}
 	public NodoListaEncadenada<UBERTrip>mergeSort(NodoListaEncadenada<UBERTrip> a) {
 		NodoListaEncadenada<UBERTrip> cabezaVieja = a;

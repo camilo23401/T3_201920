@@ -20,8 +20,7 @@ public class MVCView
 			System.out.println("3. Ordenar viajes de una hora dada utilizando shell sort");
 			System.out.println("4. Ordenar viajes de una hora dada utilizando merge sort");
 			System.out.println("5. Ordenar viajes de una hora dada utilizando quick sort");
-			System.out.println("6. Comparar duración algoritmos de ordenamiento");
-			System.out.println("7. Exit");
+			System.out.println("6. Exit");
 			System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
 		}
 

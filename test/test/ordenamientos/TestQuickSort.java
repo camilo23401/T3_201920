@@ -1,18 +1,14 @@
 package test.ordenamientos;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import model.data_structures.ArregloDinamico;
-import model.data_structures.ListaEncadenada;
-import model.data_structures.NodoListaEncadenada;
 import model.logic.MVCModelo;
 import model.logic.UBERTrip;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
-public class TestShell {
-
+public class TestQuickSort {
 	private ArregloDinamico lista;
 	private MVCModelo modelo;
 	
@@ -29,8 +25,6 @@ public class TestShell {
 		lista.agregar(new UBERTrip(0, 0, 0, 6,0 , 0, 0, 0, 0));
 		lista.agregar(new UBERTrip(0, 0, 0, 12,0 , 0, 0, 0, 0));
 		lista.agregar(new UBERTrip(0, 0, 0, 9,0 , 0, 0, 0, 0));
-		
-		
 	}
 	public void setUp2() {
 		//datos ordenados ascendentemente
@@ -63,11 +57,10 @@ public class TestShell {
         lista.agregar(new UBERTrip(0, 0, 0, 4,0 , 0, 0, 0, 0));
         lista.agregar(new UBERTrip(0, 0, 0, 3,0 , 0, 0, 0, 0));
 	}
-	
 	@Test
-	public void testShell() {
+	public void testQuickSort() {
 		setUp1();
-		lista.shellSort();
+		lista.quickSort(lista, 0, lista.darTamano()-1);
 		assertEquals(3.0, lista.darElemento(0).darTiempoPromedio(), 0.001);
 		assertEquals(4.0, lista.darElemento(1).darTiempoPromedio(), 0.001);
 		assertEquals(5.0, lista.darElemento(2).darTiempoPromedio(), 0.001);
@@ -79,9 +72,9 @@ public class TestShell {
 		assertEquals(12.0, lista.darElemento(8).darTiempoPromedio(), 0.001);
 	}
 	@Test
-	public void testShellAscendentemente() {
+	public void testQuickSortAscendentemente() {
 		setUp2() ;
-		lista.shellSort();
+		lista.quickSort(lista, 0, lista.darTamano()-1);
 		assertEquals(3.0, lista.darElemento(0).darTiempoPromedio(), 0.001);
 		assertEquals(4.0, lista.darElemento(1).darTiempoPromedio(), 0.001);
 		assertEquals(5.0, lista.darElemento(2).darTiempoPromedio(), 0.001);
@@ -93,9 +86,9 @@ public class TestShell {
 		assertEquals(12.0, lista.darElemento(8).darTiempoPromedio(), 0.001);
 	}
 	@Test
-	public void testShellDescendentemente() {
+	public void testQucikSortDescendentemente() {
 		setUp3() ;
-		lista.shellSort();
+		lista.quickSort(lista, 0, lista.darTamano()-1);
 		assertEquals(3.0, lista.darElemento(0).darTiempoPromedio(), 0.001);
 		assertEquals(4.0, lista.darElemento(1).darTiempoPromedio(), 0.001);
 		assertEquals(5.0, lista.darElemento(2).darTiempoPromedio(), 0.001);
@@ -106,7 +99,5 @@ public class TestShell {
 		assertEquals(9.0, lista.darElemento(7).darTiempoPromedio(), 0.001);
 		assertEquals(12.0, lista.darElemento(8).darTiempoPromedio(), 0.001);
 	}
-	
-	
-
+		
 }
