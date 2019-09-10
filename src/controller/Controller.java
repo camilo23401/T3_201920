@@ -127,7 +127,7 @@ public class Controller {
 				viajesHora2.quickSort(viajesHora2, 0, viajesHora2.darTamano()-1);
 				long endTime2 = System.currentTimeMillis(); // medición tiempo actual
 				long duration2 = endTime2 - startTime2; // duracion de ejecucion del algoritmo
-				System.out.println("Se ordenaran los viajes de la hora ingresada en el número 2 con el algoritmo de merge sort");
+				System.out.println("Se ordenaran los viajes de la hora ingresada en el número 2 con el algoritmo de quick sort");
 				System.out.println("El algoritmo se demoro "+duration2+" milisegundos en ordenar los datos");
 				System.out.println("10 primeros viajes");
 				for(int i=0;i<10;i++)
