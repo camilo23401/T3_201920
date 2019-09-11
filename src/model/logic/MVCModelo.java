@@ -50,21 +50,7 @@ public class MVCModelo {
 		return datos.darTamano();
 	}
 
-	/**
-	 * Requerimiento de agregar dato
-	 * @param dato
-	 */
 
-
-
-
-
-	public ListaEncadenada<UBERTrip> consultarPorHora(ListaEncadenada<UBERTrip> inicial){
-		ListaEncadenada<UBERTrip>nueva=new ListaEncadenada<UBERTrip>();
-		NodoListaEncadenada<UBERTrip>actual=inicial.darNodoActual();
-		return null;
-
-	}
 	public String[] cargarDatos() throws IOException
 	{
 		UBERTrip primerViaje = null;
@@ -129,58 +115,9 @@ public class MVCModelo {
 			}
 		}
 		return rta;	
-	}
-
-	public void ShellSort(ListaEncadenada<UBERTrip>lista) {
-		int n = lista.darTamano();
-		for (int gap = n / 2; gap > 0; gap /= 2) {
-			for (int i = gap; i < n; i++) {
-				UBERTrip key = lista.darElemento(i);
-				int j = i;
-				while (j >= gap && lista.darElemento(j-gap).compareTo(key)>0) {
-					lista.set(j, lista.darElemento(j-gap));
-					j -= gap;
-				}
-
-				lista.set(j, key);
-
-			}
+	
 		}
-	}
-	public NodoListaEncadenada<UBERTrip>mergeSort(NodoListaEncadenada<UBERTrip> a) {
-		NodoListaEncadenada<UBERTrip> cabezaVieja = a;
-		int mid = this.darTamanio(a) / 2;
-		if (a.darSiguiente()== null)
-			return a;
-
-		while (mid - 1 > 0) {
-			cabezaVieja = cabezaVieja.darSiguiente();
-			mid--;
-		}
-		NodoListaEncadenada<UBERTrip> nuevaCabeza = cabezaVieja.darSiguiente();
-		cabezaVieja.cambiarSiguiente(null); 
-		cabezaVieja = a;
-		NodoListaEncadenada<UBERTrip> t1 = mergeSort(nuevaCabeza);
-		NodoListaEncadenada<UBERTrip> t2 = mergeSort(cabezaVieja);
-		return MergeList(t1, t2); 
-	}
-
-	public NodoListaEncadenada<UBERTrip> MergeList(NodoListaEncadenada<UBERTrip> a, NodoListaEncadenada<UBERTrip> b) {
-		NodoListaEncadenada<UBERTrip> result = null;
-		if (a == null)
-			return b;
-		if (b == null)
-			return a;
-		if (a.darElemento().compareTo(b.darElemento())>0) {
-			result = b;
-			result.cambiarSiguiente( MergeList(a, b.darSiguiente()));
-		} else {
-			result = a;
-			result.cambiarSiguiente(MergeList(a.darSiguiente(), b));
-		}
-		return result;
-	}
-	public int darTamanio(NodoListaEncadenada<UBERTrip> a) {
+		public int darTamanio(NodoListaEncadenada<UBERTrip> a) {
 		int count = 0;
 		NodoListaEncadenada<UBERTrip> h = a;
 		while (h != null) {
