@@ -55,15 +55,15 @@ public class ArregloDinamico implements IArregloDinamico {
 	{ 
 		int n = tamanoAct; 
 
-		for (int gap = n/2; gap > 0; gap /= 2) 
+		for (int intervalo = n/2; intervalo > 0; intervalo /= 2) 
 		{ 
-			for (int i = gap; i < n; i += 1) 
+			for (int i = intervalo; i < n; i += 1) 
 			{ 
 
 				UBERTrip temp = elementos[i]; 
 				int j; 
-				for (j = i; j >= gap &&this.darElemento(j-gap).compareTo(temp)>0; j -= gap) {
-					elementos[j] = elementos[j - gap]; 
+				for (j = i; j >= intervalo &&this.darElemento(j-intervalo).compareTo(temp)>0; j -= intervalo) {
+					elementos[j] = elementos[j - intervalo]; 
 				}
 
 				elementos[j] = temp; 
@@ -90,10 +90,10 @@ public class ArregloDinamico implements IArregloDinamico {
 
 		merge(a, l, r, mid, n - mid);
 	}
-	public static void merge(ArregloDinamico a, ArregloDinamico l, ArregloDinamico r, int left, int right) {
+	public static void merge(ArregloDinamico a, ArregloDinamico l, ArregloDinamico r, int izquierda, int derecha) {
 
 		int i = 0, j = 0, k = 0;
-		while (i < left && j < right) {
+		while (i < izquierda && j < derecha) {
 			if (l.darElemento(i).compareTo(r.darElemento(j))<=0) {
 				a.darElementos()[k++] = l.darElementos()[i++];
 			}
@@ -101,26 +101,26 @@ public class ArregloDinamico implements IArregloDinamico {
 				a.darElementos()[k++] = r.darElementos()[j++];
 			}
 		}
-		while (i < left) {
+		while (i < izquierda) {
 			a.darElementos()[k++] = l.darElementos()[i++];
 		}
-		while (j < right) {
+		while (j < derecha) {
 			a.darElementos()[k++] = r.darElementos()[j++];
 		}
 	}
 
-	public void quickSort(ArregloDinamico arr, int begin, int end) {
-		if (begin < end) {
-			int partitionIndex = partition(arr, begin, end);
+	public void quickSort(ArregloDinamico arr, int incio, int finalArreglo) {
+		if (incio < finalArreglo) {
+			int partitionIndex = partition(arr, incio, finalArreglo);
 
-			quickSort(arr, begin, partitionIndex-1);
-			quickSort(arr, partitionIndex+1, end);
+			quickSort(arr, incio, partitionIndex-1);
+			quickSort(arr, partitionIndex+1, finalArreglo);
 		}
 	}
-	private int partition(ArregloDinamico arr, int begin, int end) {
-		UBERTrip pivot = arr.darElemento(end);
-		int i = (begin-1);
-		for (int j = begin; j < end; j++) {
+	private int partition(ArregloDinamico arr, int inicio, int finalArreglo) {
+		UBERTrip pivot = arr.darElemento(finalArreglo);
+		int i = (inicio-1);
+		for (int j = inicio; j < finalArreglo; j++) {
 			if (arr.darElemento(j).compareTo(pivot)<=0) {
 				i++;
 				UBERTrip swapTemp = arr.darElemento(i);
@@ -130,8 +130,8 @@ public class ArregloDinamico implements IArregloDinamico {
 		}
 
 		UBERTrip swapTemp = arr.darElemento(i+1);
-		arr.darElementos()[i+1] = arr.darElementos()[end];
-		arr.darElementos()[end] = swapTemp;
+		arr.darElementos()[i+1] = arr.darElementos()[finalArreglo];
+		arr.darElementos()[finalArreglo] = swapTemp;
 
 		return i+1;
 	}
